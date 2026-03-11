@@ -8,6 +8,14 @@ import CountryList from './components/CountryList';
 import DraggableCard from './components/DraggableCard';
 import { fetchCountries } from './services/api';
 
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png'
+});
+git
 export default function App() {
   const [countries, setCountries] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,7 +36,7 @@ export default function App() {
   useEffect(() => {
     if (!mapInstance.current && mapRef.current) {
       mapInstance.current = L.map(mapRef.current).setView([20, 0], 2);
-      
+
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "© OpenStreetMap"
       }).addTo(mapInstance.current);
@@ -40,11 +48,11 @@ export default function App() {
     if (selectedCountry && selectedCountry.latlng && mapInstance.current) {
       const latlng = selectedCountry.latlng;
       mapInstance.current.setView(latlng, 5);
-      
+
       if (markerInstance.current) {
         mapInstance.current.removeLayer(markerInstance.current);
       }
-      
+
       markerInstance.current = L.marker(latlng).addTo(mapInstance.current);
     }
   }, [selectedCountry]);
@@ -63,16 +71,16 @@ export default function App() {
     <div>
       <Header />
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      
+
       {/* Map Container allows absolute positioning for the popup */}
       <div className="map-container">
         <div id="map" ref={mapRef}></div>
-        
+
         {/* Render the movable card conditionally */}
         {selectedCountry && (
-          <DraggableCard 
-            country={selectedCountry} 
-            onClose={() => setSelectedCountry(null)} 
+          <DraggableCard
+            country={selectedCountry}
+            onClose={() => setSelectedCountry(null)}
           />
         )}
       </div>
