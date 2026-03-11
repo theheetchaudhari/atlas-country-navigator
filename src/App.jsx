@@ -15,7 +15,7 @@ L.Icon.Default.mergeOptions({
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png'
 });
-git
+
 export default function App() {
   const [countries, setCountries] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
