@@ -1,3 +1,3 @@
 export default function Header() {
-  return <h1>Country Finder 🌍</h1>;
+  return <h1>Atlas Country Navigator 🌍</h1>;
 }
